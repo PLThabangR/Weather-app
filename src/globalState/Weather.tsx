@@ -3,7 +3,7 @@
 import { useReducer } from "react";
 
 // initial state type
- type WeatherState= {
+export type WeatherState= {
     id: number;
     temp: number;
     humidity: number;
@@ -62,6 +62,8 @@ export const weatherReducer = (state: WeatherState, action: WeatherAction): Weat
                 //
                 id: action.payload.id,
                 temp: action.payload.temp,
+                humidity: action.payload.humidity,
+                windSpeed: action.payload.windSpeed,
                 city: action.payload.city,
                 country: action.payload.country,
                 icon: action.payload.icon,
