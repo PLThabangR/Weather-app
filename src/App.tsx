@@ -11,12 +11,17 @@ function App() {
 
   return (
     <>
+    <div >
 
-     <Routes>
+
+<Routes>
+
       <Route path="/" element={<Home/>} />
       <Route path="/Details" element={<MoreDetails/>} />
      </Routes>
 <Toaster position='bottom-right'/>
+    </div>
+     
     </>
   )
 }

@@ -22,7 +22,7 @@ const Home = () => {
     //bg-[#443C6C] 
 
     //Now we are destructuring the state values
-   const { temp, city, country, icon, description } = state;
+   const { temp, city, country, icon, description, humidity, windSpeed,date } = state;
 
    const  updateWeather = async () =>{
     //Creating a type for the user location
@@ -52,18 +52,17 @@ const Home = () => {
     //if the response is not ok throw an error
     if(!response.ok){
         setLoading(false);
-         throw new Error("Network response was not ok");
+        //Shoot a toast for error
         //notify user for the error with a custom toast with tailwind
-
-      toast.custom(()=>{
+      toast.custom(()=>{ //start of toast
             return (
                 <div className="toast toast-end">
-                    <div className="alert alert-info">
+                    <div className="alert alert-error">
                         <span>Network response was not ok</span>
                     </div>
                 </div>
             )
-        })
+        })//end of toast
         }
 
     // for daily this will be displayed on a card
@@ -73,6 +72,16 @@ const Home = () => {
     if(response.ok){
         //converting the data to json
         setLoading(false);
+        //notify user for the succes with a custom toast with tailwind
+            toast.custom(()=>{ //start of toast
+            return (
+                <div className="toast toast-end">
+                    <div className="alert alert-success">
+                        <span>Data fetched successfully</span>
+                    </div>
+                </div>
+            )
+        })//end of toast
     const data = await response.json();
     console.log("Data from opn weather ",data);
 
@@ -84,10 +93,11 @@ const Home = () => {
         humidity: data.main.humidity,
         city: data.name,
         country: data.sys.country,
-        //safety check if icnon is not empty
+        //safety check if icnon is not empty since is an array
         icon:data.weather.length>0? `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`:"",
 
-        description:data.weather.length>0?  data.weather[0].description:""
+        description:data.weather.length>0?  data.weather[0].description:"",
+        date: new Date().toLocaleString(),
     }
 
     console.log("My new weather data",newWeatherData);
@@ -101,20 +111,38 @@ const Home = () => {
    }
 
    useEffect(() => {
-       updateWeather();
+      // updateWeather();
    }, [])
   return (
 
-    <div data-theme="light">
-<div className='h-screen w-5/6 container mx-auto' >
+    <div >
+<div data-theme="dark" className='h-screen  w-full md:w-auto sm:w-full container p-5 ' >
         <Navbar/>
                  <h1>Temperature: {temp}°C</h1>
+                <h1>Humidity: {humidity}</h1>
+                <h1>Wind Speed: {windSpeed}</h1>
                 <h1>City: {city}</h1>
                 <h1>Country: {country}</h1>
-                <h1>Icon: {icon}</h1>
+                <img src={icon}/>
                 <h1>Description: {description}</h1> 
+                <h1>Date: {date}</h1>
 {/* is loading */}
      
+
+     <div className="card bg-base-100 image-full w-96 shadow-sm">
+  <figure>
+    <img
+      src={icon}
+      alt="Shoes" />
+  </figure>
+  <div className="card-body">
+    <h2 className="card-title">Card Title</h2>
+    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-primary">Buy Now</button>
+    </div>
+  </div>
+</div>
        
        {loading && <span className="loading loading-spinner text-primary"></span>}
         <button className="btn btn-primary" onClick={() => updateWeather()}>Primary</button>

@@ -1,0 +1,13 @@
+
+
+//responsiveness
+@media (min-width:600px) and (max-width:1023){
+
+
+
+.content div{
+    /* Two columns with space in between */
+    flex:0.0 calc(50%-20px);
+    
+}
+} 
