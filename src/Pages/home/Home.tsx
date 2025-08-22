@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react'
 import {  useWeather } from '../../globalState/Weather'
 import type { WeatherState } from '../../globalState/Weather'
 import toast from 'react-hot-toast';
+
+//import css
+import "./home.css"
 //importing the type
 //import type { WeatherState } from '../../globalState/Weather'
 
@@ -14,6 +17,9 @@ const Home = () => {
     //Now we are using our use reducer hook
     const { state, dispatch } = useWeather();
 
+    //date satte
+ const [currentDate, setCurrentDate] = useState(new Date());
+
     //sate for units
     const [units, setUnits] = useState(true);
 
@@ -22,7 +28,7 @@ const Home = () => {
     //bg-[#443C6C] 
 
     //Now we are destructuring the state values
-   const { temp, city, country, icon, description, humidity, windSpeed,date } = state;
+   const { temp, city, country, icon, description, humidity, windSpeed} = state;
 
    const  updateWeather = async () =>{
     //Creating a type for the user location
@@ -97,7 +103,7 @@ const Home = () => {
         icon:data.weather.length>0? `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`:"",
 
         description:data.weather.length>0?  data.weather[0].description:"",
-        date: new Date().toLocaleString(),
+       
     }
 
     console.log("My new weather data",newWeatherData);
@@ -115,34 +121,41 @@ const Home = () => {
    }, [])
   return (
 
-    <div >
-<div data-theme="dark" className='h-screen  w-full md:w-auto sm:w-full container p-5 ' >
+    <div data-theme={"light"}  className='home-container'>
         <Navbar/>
-                 <h1>Temperature: {temp}°C</h1>
-                <h1>Humidity: {humidity}</h1>
-                <h1>Wind Speed: {windSpeed}</h1>
-                <h1>City: {city}</h1>
-                <h1>Country: {country}</h1>
-                <img src={icon}/>
-                <h1>Description: {description}</h1> 
-                <h1>Date: {date}</h1>
+<div  className='h-screen  w-full  md:w-auto  sm:w-full container p-5 flex flex-col items-center ' >
+        
+           <h1 className="card-title">Welcome to Weather</h1>        
+             
 {/* is loading */}
      
 
-     <div className="card bg-base-100 image-full w-96 shadow-sm">
+{
+    state.temp &&
+   (  <div className="card bg-base text-100 w-96 align-middle shadow-sm">
   <figure>
     <img
-      src={icon}
-      alt="Shoes" />
+    src={icon}
+      alt="icon" />
   </figure>
   <div className="card-body">
-    <h2 className="card-title">Card Title</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+    <h2 className="card-title">
+      {city}
+      <div className="badge badge-secondary">{country}</div>
+
+    </h2>
+     <h1 className="card-title">{temp}°C</h1>
+     <h1 className="card-title">{description}</h1>
+     <h1 className="card-title">Wind Speed : {windSpeed}</h1>
+     <h1 className="card-title">Humidity : {humidity}</h1>
+   
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+      
+      <div className="badge badge-outline">{currentDate.toDateString()}</div>
     </div>
   </div>
-</div>
+</div>)
+}
        
        {loading && <span className="loading loading-spinner text-primary"></span>}
         <button className="btn btn-primary" onClick={() => updateWeather()}>Primary</button>

@@ -13,7 +13,8 @@ export type WeatherState= {
     country: string;
     icon: string;
     description: string;
-    date: string;
+
+   
 };
 
 // type for action
@@ -28,8 +29,9 @@ export type WeatherState= {
         country: string;
         icon: string;
         description: string;
-        date: string;
+        
     };
+  
 };
 
 //export type WeatherAction = WeatherFunction;
@@ -44,7 +46,7 @@ export type WeatherState= {
     country: "",
     icon: "",
     description: "",
-    date: "",
+  
 };
  export const useWeather = () => {
 //     // useReducer takes a reducer function and an initial state
