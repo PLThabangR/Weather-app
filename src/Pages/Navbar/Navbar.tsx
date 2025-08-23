@@ -1,9 +1,10 @@
 
 interface NavbarProps {
  
-  changeYourTheme: () => void
+  changeYourTheme: () => void;
+  changeYourUnits:()=>void
 }
-const Navbar = ({ changeYourTheme} : NavbarProps) => {
+const Navbar = ({ changeYourTheme,changeYourUnits} : NavbarProps) => {
   return (
     <div>
 <div className="navbar bg-base-100 shadow-sm">
@@ -20,6 +21,16 @@ const Navbar = ({ changeYourTheme} : NavbarProps) => {
         
         <li onClick={changeYourTheme}><a>Dark</a></li>
         <li onClick={changeYourTheme}><a>Light</a></li>
+      </ul>
+    </div>
+     <div className="dropdown dropdown-end">
+     <button className="btn btn-primary">Units</button>
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        
+        <li onClick={changeYourUnits}><a>Celsius</a></li>
+        <li onClick={changeYourUnits}><a> Fahrenheit</a></li>
       </ul>
     </div>
   </div>

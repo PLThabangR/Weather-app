@@ -11,10 +11,7 @@ import "./home.css"
 //importing the type
 //import type { WeatherState } from '../../globalState/Weather'
 
-//Creating the inteface for the props
- interface NavbarProps {
-     changeYourTheme: () => void;
- }
+
 
 const Home = () => {
     //Now we are using our use reducer hook
@@ -23,7 +20,7 @@ const Home = () => {
     const [isTheme, setIsTheme] = useState(false);
     //date satte
  const [currentDate, setCurrentDate] = useState(new Date());
-    //sate for units
+    //sate for units to true by default as celcius
     const [units, setUnits] = useState(true);
 
     //set state for loading
@@ -33,9 +30,13 @@ const Home = () => {
     //Now we are destructuring the state values
    const { temp, city, country, icon, description, humidity, windSpeed} = state;
 
+   //function to change the theme
    const changeYourTheme = () => { 
-    console.log("Theme changed")
      setIsTheme(!isTheme);
+   }
+
+   const changeYourUnits = () => {
+       setUnits(!units);
    }
    const  updateWeather = async () =>{
     //Creating a type for the user location
@@ -51,6 +52,7 @@ const Home = () => {
     //Declare a variable to hold tehe response type Response
      let response: Response;
 
+     //By defualt it will be in celsius 
     if(units){
          //fetching the data from the api celsius units
          //For temperature in Celsius use units=metric this is from the open weather documentation
@@ -114,7 +116,7 @@ const Home = () => {
     }
 
     console.log("My new weather data",newWeatherData);
-    //dispatching the data to the reducer
+    //dispatching the data to the reducer 
     dispatch({ type: "SET_WEATHER", payload: newWeatherData });
     }
     
@@ -125,11 +127,12 @@ const Home = () => {
 
    useEffect(() => {
       // updateWeather();
-   }, [])
+   }, [units,
+   ])
   return (
 
     <div data-theme={isTheme ? "dark" : "light"}  className='home-container'>
-        <Navbar  changeYourTheme={changeYourTheme}/>
+        <Navbar changeYourUnits={changeYourUnits}  changeYourTheme={changeYourTheme}/>
 <div  className='h-screen  w-full  md:w-auto  sm:w-full container p-5 flex flex-col items-center ' >
         
            <h1 className="card-title">Welcome to Weather</h1>        
