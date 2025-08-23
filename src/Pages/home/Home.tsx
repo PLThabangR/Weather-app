@@ -1,5 +1,5 @@
 
-import Navbar from '../Navbar/Navbar'
+import Navbar from '../Navbar/Navbar';
 import { useEffect, useState } from 'react'
 //importing the reducer function
 import {  useWeather } from '../../globalState/Weather'
@@ -11,15 +11,18 @@ import "./home.css"
 //importing the type
 //import type { WeatherState } from '../../globalState/Weather'
 
-//We are defininng the initial state
+//Creating the inteface for the props
+ interface NavbarProps {
+     changeYourTheme: () => void;
+ }
 
 const Home = () => {
     //Now we are using our use reducer hook
     const { state, dispatch } = useWeather();
-
+    //state for theme
+    const [isTheme, setIsTheme] = useState(false);
     //date satte
  const [currentDate, setCurrentDate] = useState(new Date());
-
     //sate for units
     const [units, setUnits] = useState(true);
 
@@ -30,6 +33,10 @@ const Home = () => {
     //Now we are destructuring the state values
    const { temp, city, country, icon, description, humidity, windSpeed} = state;
 
+   const changeYourTheme = () => { 
+    console.log("Theme changed")
+     setIsTheme(!isTheme);
+   }
    const  updateWeather = async () =>{
     //Creating a type for the user location
     type  Position = {coords: {latitude: number, longitude: number}}
@@ -121,8 +128,8 @@ const Home = () => {
    }, [])
   return (
 
-    <div data-theme={"light"}  className='home-container'>
-        <Navbar/>
+    <div data-theme={isTheme ? "dark" : "light"}  className='home-container'>
+        <Navbar  changeYourTheme={changeYourTheme}/>
 <div  className='h-screen  w-full  md:w-auto  sm:w-full container p-5 flex flex-col items-center ' >
         
            <h1 className="card-title">Welcome to Weather</h1>        

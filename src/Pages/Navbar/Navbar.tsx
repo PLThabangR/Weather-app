@@ -1,6 +1,9 @@
 
-
-const Navbar = () => {
+interface NavbarProps {
+ 
+  changeYourTheme: () => void
+}
+const Navbar = ({ changeYourTheme} : NavbarProps) => {
   return (
     <div>
 <div className="navbar bg-base-100 shadow-sm">
@@ -15,8 +18,8 @@ const Navbar = () => {
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         
-        <li><a>Dark</a></li>
-        <li><a>Light</a></li>
+        <li onClick={changeYourTheme}><a>Dark</a></li>
+        <li onClick={changeYourTheme}><a>Light</a></li>
       </ul>
     </div>
   </div>
