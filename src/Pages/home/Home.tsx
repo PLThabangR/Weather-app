@@ -25,7 +25,9 @@ const Home = () => {
 
     //set state for loading
     const [loading, setLoading] = useState(false);
-    //bg-[#443C6C] 
+    //state for storing daily data
+    const [dailyData,setDailyData]= useState([])
+
 
     //Now we are destructuring the state values
    const { temp, city, country, icon, description, humidity, windSpeed} = state;
@@ -33,10 +35,30 @@ const Home = () => {
    //function to change the theme
    const changeYourTheme = () => { 
      setIsTheme(!isTheme);
+     
+       toast.custom(()=>{ //start of toast
+            return (
+                <div className="toast toast-end">
+                    <div className="alert alert-success">
+                        <span>{isTheme? "Light":"Dark"}</span>
+                    </div>
+                </div>
+            )
+        })//end of toast
+    
    }
 
    const changeYourUnits = () => {
        setUnits(!units);
+         toast.custom(()=>{ //start of toast
+            return (
+                <div className="toast toast-end">
+                    <div className="alert alert-success">
+                        <span>{units? "Celsius":"Fahrenheit"}</span>
+                    </div>
+                </div>
+            )
+        })//end of toast
    }
    const  updateWeather = async () =>{
     //Creating a type for the user location
@@ -51,16 +73,27 @@ const Home = () => {
     setLoading(true);
     //Declare a variable to hold tehe response type Response
      let response: Response;
-
+     let  dailyResponse:Response;
+     let numberOfDays=7;
      //By defualt it will be in celsius 
     if(units){
          //fetching the data from the api celsius units
          //For temperature in Celsius use units=metric this is from the open weather documentation
   response =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&units=metric&lang=en&appid=${apiKeys}`);
+
+  //data for daily
+        dailyResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=metric`);
+    //  
+   setDailyData(()=>dailyData)
     }else{
          //fetching the data from the api fahrenheit units measurements
          //For temperature in Fahrenheit use units=imperial opne waether documentation
      response =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=imperial`);
+
+      //data for daily
+    dailyResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&cnt=${numberOfDays}&appid=${apiKeys}&units=imperial`);
+        
+   setDailyData(()=>dailyData)
     }
 
 
@@ -82,7 +115,7 @@ const Home = () => {
 
     // for daily this will be displayed on a card
 //   const dailyResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=metric`);
-
+        //set dat
 
     if(response.ok){
         //converting the data to json
@@ -98,7 +131,7 @@ const Home = () => {
             )
         })//end of toast
     const data = await response.json();
-    console.log("Data from opn weather ",data);
+  
 
    //creating my unique weather object
     const newWeatherData: WeatherState = {
@@ -115,7 +148,7 @@ const Home = () => {
        
     }
 
-    console.log("My new weather data",newWeatherData);
+  
     //dispatching the data to the reducer 
     dispatch({ type: "SET_WEATHER", payload: newWeatherData });
     }
@@ -125,24 +158,31 @@ const Home = () => {
 
    }
 
+   //reload when units are changed
    useEffect(() => {
-      // updateWeather();
+     updateWeather();
    }, [units,
    ])
+
+   //loading when app loads
+    useEffect(() => {
+     updateWeather();
+   }, [])
   return (
 
     <div data-theme={isTheme ? "dark" : "light"}  className='home-container'>
         <Navbar changeYourUnits={changeYourUnits}  changeYourTheme={changeYourTheme}/>
 <div  className='h-screen  w-full  md:w-auto  sm:w-full container p-5 flex flex-col items-center ' >
         
-           <h1 className="card-title">Welcome to Weather</h1>        
+           <h1 className="text-4xl font-semibold tracking-tight text-balance text-black sm:text-6xl m-5 ">Weather today</h1>        
              
 {/* is loading */}
      
+  
 
 {
     state.temp &&
-   (  <div className="card bg-base text-100 w-96 align-middle shadow-sm">
+   (  <div className="card bg-base text-100 w-96 align-middle shadow-sm mt-5">
   <figure>
     <img
     src={icon}
@@ -154,7 +194,7 @@ const Home = () => {
       <div className="badge badge-secondary">{country}</div>
 
     </h2>
-     <h1 className="card-title">{temp}°C</h1>
+     <h1 className="card-title">{temp}</h1>
      <h1 className="card-title">{description}</h1>
      <h1 className="card-title">Wind Speed : {windSpeed}</h1>
      <h1 className="card-title">Humidity : {humidity}</h1>
@@ -168,7 +208,7 @@ const Home = () => {
 }
        
        {loading && <span className="loading loading-spinner text-primary"></span>}
-        <button className="btn btn-primary" onClick={() => updateWeather()}>Primary</button>
+
 
     </div>
     </div>

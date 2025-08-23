@@ -19,8 +19,8 @@ const Navbar = ({ changeYourTheme,changeYourUnits} : NavbarProps) => {
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         
-        <li onClick={changeYourTheme}><a>Dark</a></li>
-        <li onClick={changeYourTheme}><a>Light</a></li>
+        <li onClick={changeYourTheme}><a>Toggle</a></li>
+      
       </ul>
     </div>
      <div className="dropdown dropdown-end">
