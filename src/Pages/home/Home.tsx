@@ -26,7 +26,7 @@ const Home = () => {
     //set state for loading
     const [loading, setLoading] = useState(false);
     //state for storing daily data
-    const [dailyData,setDailyData]= useState([])
+    const [dailyData,setDailyData]= useState<any>([])
 
 
     //Now we are destructuring the state values
@@ -73,7 +73,7 @@ const Home = () => {
     setLoading(true);
     //Declare a variable to hold tehe response type Response
      let response: Response;
-     let  dailyResponse:Response;
+    
      let numberOfDays=7;
      //By defualt it will be in celsius 
     if(units){
@@ -82,18 +82,18 @@ const Home = () => {
   response =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&units=metric&lang=en&appid=${apiKeys}`);
 
   //data for daily
-        dailyResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=metric`);
-    //  
-   setDailyData(()=>dailyData)
+  let dailyDataResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=metric`);
+        //Set this data inside the array
+   setDailyData([dailyDataResponse])
     }else{
          //fetching the data from the api fahrenheit units measurements
          //For temperature in Fahrenheit use units=imperial opne waether documentation
      response =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=imperial`);
 
       //data for daily
-    dailyResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&cnt=${numberOfDays}&appid=${apiKeys}&units=imperial`);
-        
-   setDailyData(()=>dailyData)
+let   dailyDataResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&cnt=${numberOfDays}&appid=${apiKeys}&units=imperial`);
+        //set this data inside array
+   setDailyData([dailyDataResponse])
     }
 
 
@@ -161,6 +161,7 @@ const Home = () => {
    //reload when units are changed
    useEffect(() => {
      updateWeather();
+     console.log(dailyData);
    }, [units,
    ])
 
@@ -209,6 +210,8 @@ const Home = () => {
        
        {loading && <span className="loading loading-spinner text-primary"></span>}
 
+        {/* Display daily weatheron the card */}
+        {/* { dailyData.length > 0 && <DailyWeatherCard data={dailyData} />} */}
 
     </div>
     </div>
