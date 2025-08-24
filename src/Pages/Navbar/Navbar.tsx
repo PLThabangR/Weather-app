@@ -1,6 +1,5 @@
 
 interface NavbarProps {
- 
   changeYourTheme: () => void;
   changeYourUnits:()=>void
 }

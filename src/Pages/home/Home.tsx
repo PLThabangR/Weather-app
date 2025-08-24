@@ -19,7 +19,7 @@ const Home = () => {
     //state for theme
     const [isTheme, setIsTheme] = useState(false);
     //date satte
- const [currentDate, setCurrentDate] = useState(new Date());
+ const [currentDate] = useState(new Date());
     //sate for units to true by default as celcius
     const [units, setUnits] = useState(true);
 
