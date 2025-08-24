@@ -175,8 +175,8 @@ let   dailyDataResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast
         <Navbar changeYourUnits={changeYourUnits}  changeYourTheme={changeYourTheme}/>
 <div  className='h-screen  w-full  md:w-auto  sm:w-full container p-5 flex flex-col items-center ' >
         
-           <h1 className="text-4xl font-semibold tracking-tight text-balance text-black sm:text-6xl m-5 ">Weather today</h1>        
-             
+           <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl m-5 ">Weather today</h1>        
+              
 {/* is loading */}
      
   
