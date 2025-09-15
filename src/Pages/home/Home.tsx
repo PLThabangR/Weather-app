@@ -12,16 +12,7 @@ import DailyWeatherCard from '../../Components/Card/DailyWeatherCard';
 //importing the type
 //import type { WeatherState } from '../../globalState/Weather'
 
-interface DailyWeather{
-    date_txt: string,
-    clouds: string,
-    temp: number,
-    city: string,
-    description: string,
-    windSpeed: number,
-    humidity: number,
-    icon: string
-}
+
 
 
 const Home = () => {
