@@ -52,6 +52,6 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 📸 Screenshots
 ![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/blackThemeForecast.png)
 ![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/darktheme_weath.png)
-![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/weatherapp.png)
-![Dashboard Screenshot](https://github.com/PLThabangR/shopping-list-app/blob/main/public/edit_page.png)
+![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/weathernow.png)
+
 
