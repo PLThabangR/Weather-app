@@ -1,71 +1,56 @@
-# React + TypeScript + Vite
+# 📌 Weather Application (React + TypeScript + Open weather api)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/weather_light_them.png)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# A simple waether application  built with **React** and **TypeScript**, powered by open weather data .
 
-## Expanding the ESLint configuration
+---
+## step 1
+- Clone this project using git clone 
+  ```sh
+   git clone https://github.com/PLThabangR/Weather-app.git
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Step 2 
+- install app dependencies using npm
+```sh
+ npm install
+ ``` 
+## Step 3 
+- To run app
+  ```sh
+   npm start
+   ``` 
+## 🛠️ Tech Stack
+- React (Frontend)
+- TypeScript (Type safety)
+- Daisy UI (Tailwind)
+- Redux (State management)
+- Open Weather (Mock API)
+- Vite (Fast development environment)
+  
+# 📂 Project Structure
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- weather-app/
+- ├── src/          
+- ├── data/        
+- ├── public/       # Static assets
+- └── package.json
+- ⚡ Features
+## Weather app
+- (city, humidity, description, etc.)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Built with React + TypeScript for scalability
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# Weather-app
-# Weather-app
+🤝 Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests.
+📸 Screenshots
+![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/blackThemeForecast.png)
+![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/darktheme_weath.png)
+![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/weatherapp.png)
+![Dashboard Screenshot](https://github.com/PLThabangR/shopping-list-app/blob/main/public/edit_page.png)
+
