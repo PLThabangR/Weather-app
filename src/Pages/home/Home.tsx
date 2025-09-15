@@ -8,9 +8,20 @@ import toast from 'react-hot-toast';
 
 //import css
 import "./home.css"
+import DailyWeatherCard from '../../Components/Card/DailyWeatherCard';
 //importing the type
 //import type { WeatherState } from '../../globalState/Weather'
 
+interface DailyWeather{
+    date_txt: string,
+    clouds: string,
+    temp: number,
+    city: string,
+    description: string,
+    windSpeed: number,
+    humidity: number,
+    icon: string
+}
 
 
 const Home = () => {
@@ -26,7 +37,7 @@ const Home = () => {
     //set state for loading
     const [loading, setLoading] = useState(false);
     //state for storing daily data
-    const [dailyData,setDailyData]= useState<any>([])
+    const [dailyData,setDailyData]= useState([])
 
 
     //Now we are destructuring the state values
@@ -85,6 +96,7 @@ const Home = () => {
      
   const dailyData = await dailyDataResponse.json();
   //Set this data inside the array
+  
    setDailyData(dailyData.list)
    console.log("dailyDataResponse with celsius",dailyData.list)
     }else{
@@ -160,10 +172,10 @@ const Home = () => {
     dispatch({ type: "SET_WEATHER", payload: newWeatherData });
     }
     
-    
-//dispatch({ type: "SET_WEATHER", payload: { temp: 23, city: "New York", country: "USA", icon: "https://openweathermap.org/img/wn/10d@2x.png", description: "Cloudy" } })
+     }//end of update weather function
 
-   }
+//function to display daily weather
+
 
    //reload when units are changed
    useEffect(() => {
@@ -190,7 +202,9 @@ const Home = () => {
 
 {
     state.temp &&
-   (  <div className="card bg-base text-100 w-96 align-middle shadow-sm mt-5">
+   (
+    
+    <div className="card bg-base text-100 w-96 align-middle shadow-sm mt-5">
   <figure>
     <img
     src={icon}
@@ -212,13 +226,16 @@ const Home = () => {
       <div className="badge badge-outline">{currentDate.toDateString()}</div>
     </div>
   </div>
-</div>)
+</div>
+)
 }
        
        {loading && <span className="loading loading-spinner text-primary"></span>}
 
         {/* Display daily weatheron the card */}
-        {/* { dailyData.length > 0 && <DailyWeatherCard data={dailyData} />} */}
+      <div className='flex col flex-wrap justify-center gap-5  md:flex-row xl:flex-row'>
+          { dailyData?.length > 0 && dailyData.map((item: any, index: number) => <DailyWeatherCard key={index} icon={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} date_txt={item.dt_txt}  temp={item.main.temp} city={item.main.city} description={item.weather[0].description} windSpeed={item.wind.speed} humidity={item.main.humidity}  />) } 
+      </div>
 
     </div>
     </div>
