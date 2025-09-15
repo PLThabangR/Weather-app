@@ -39,7 +39,7 @@ const Home = () => {
        toast.custom(()=>{ //start of toast
             return (
                 <div className="toast toast-end">
-                    <div className="alert alert-success">
+                    <div  className="alert alert-success">
                         <span>{isTheme? "Light":"Dark"}</span>
                     </div>
                 </div>
@@ -74,26 +74,33 @@ const Home = () => {
     //Declare a variable to hold tehe response type Response
      let response: Response;
     
-     let numberOfDays=7;
      //By defualt it will be in celsius 
     if(units){
          //fetching the data from the api celsius units
          //For temperature in Celsius use units=metric this is from the open weather documentation
   response =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&units=metric&lang=en&appid=${apiKeys}`);
 
-  //data for daily
-  let dailyDataResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=metric`);
-        //Set this data inside the array
-   setDailyData([dailyDataResponse])
+  //data for daily with metrics units
+  let dailyDataResponse =  await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=metric`);
+     
+  const dailyData = await dailyDataResponse.json();
+  //Set this data inside the array
+   setDailyData(dailyData.list)
+   console.log("dailyDataResponse with celsius",dailyData.list)
     }else{
          //fetching the data from the api fahrenheit units measurements
          //For temperature in Fahrenheit use units=imperial opne waether documentation
      response =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=imperial`);
 
-      //data for daily
-let   dailyDataResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&cnt=${numberOfDays}&appid=${apiKeys}&units=imperial`);
+      //data for daily in fehrenheit
+  let   dailyDataResponse =  await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${userLocation.coords.latitude}&lon=${userLocation.coords.longitude}&appid=${apiKeys}&units=imperial`);
         //set this data inside array
-   setDailyData([dailyDataResponse])
+
+        const dailyData = await dailyDataResponse.json();
+  //Set this data inside the array
+   setDailyData(dailyData.list)
+   console.log("dailyDataResponse with fahrenheit",dailyData.list)
+ 
     }
 
 
@@ -124,7 +131,7 @@ let   dailyDataResponse =  await fetch(`api.openweathermap.org/data/2.5/forecast
             toast.custom(()=>{ //start of toast
             return (
                 <div className="toast toast-end">
-                    <div className="alert alert-success">
+                    <div role="alert" className="alert alert-success">
                         <span>Data fetched successfully</span>
                     </div>
                 </div>
