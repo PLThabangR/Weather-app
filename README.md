@@ -5,6 +5,7 @@
 
 # A simple waether application  built with **React** and **TypeScript**, powered by open weather data .
 
+live https://weather-app-brown-kappa-92.vercel.app/
 ---
 ## step 1
 - Clone this project using git clone 
