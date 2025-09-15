@@ -192,9 +192,9 @@ const Home = () => {
 
     <div data-theme={isTheme ? "dark" : "light"}  className='home-container'>
         <Navbar changeYourUnits={changeYourUnits}  changeYourTheme={changeYourTheme}/>
-<div  className='h-screen  w-full  md:w-auto  sm:w-full container p-5 flex flex-col items-center ' >
+<div  className='h-full  w-full  md:w-auto  sm:w-full container p-5 flex flex-col items-center ' >
         
-           <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl m-5 ">Weather today</h1>        
+           <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-6xl m-5 ">Weather today</h1>        
               
 {/* is loading */}
      
@@ -231,7 +231,8 @@ const Home = () => {
 }
        
        {loading && <span className="loading loading-spinner text-primary"></span>}
-
+         <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-3xl m-5 ">Weather for the next 5 days</h1>  
+          <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-1xl m-5 ">In 3 hours interval</h1>   
         {/* Display daily weatheron the card */}
       <div className='flex col flex-wrap justify-center gap-5  md:flex-row xl:flex-row'>
           { dailyData?.length > 0 && dailyData.map((item: any, index: number) => <DailyWeatherCard key={index} icon={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} date_txt={item.dt_txt}  temp={item.main.temp} city={item.main.city} description={item.weather[0].description} windSpeed={item.wind.speed} humidity={item.main.humidity}  />) } 
