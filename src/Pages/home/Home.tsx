@@ -214,7 +214,7 @@ const Home = () => {
     <h2 className="card-title">
       {city}
       <div className="badge badge-secondary">{country}</div>
-
+      
     </h2>
      <h1 className="card-title">{temp}</h1>
      <h1 className="card-title">{description}</h1>
@@ -231,11 +231,11 @@ const Home = () => {
 }
        
        {loading && <span className="loading loading-spinner text-primary"></span>}
-         <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-3xl m-5 ">Weather for the next 5 days</h1>  
+         <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-3xl m-5 ">Forecast for the next 5 days</h1>  
           <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-1xl m-5 ">In 3 hours interval</h1>   
         {/* Display daily weatheron the card */}
       <div className='flex col flex-wrap justify-center gap-5  md:flex-row xl:flex-row'>
-          { dailyData?.length > 0 && dailyData.map((item: any, index: number) => <DailyWeatherCard key={index} icon={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} date_txt={item.dt_txt}  temp={item.main.temp} city={item.main.city} description={item.weather[0].description} windSpeed={item.wind.speed} humidity={item.main.humidity}  />) } 
+          { dailyData?.length > 0 && dailyData.map((item: any, index: number) => <DailyWeatherCard key={index} icon={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} date_txt={item.dt_txt}  temp={item.main.temp} city={city} country={country} description={item.weather[0].description} windSpeed={item.wind.speed} humidity={item.main.humidity}  />) } 
       </div>
 
     </div>
