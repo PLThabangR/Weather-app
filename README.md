@@ -47,6 +47,7 @@ Built with React + TypeScript for scalability
 
 
 🤝 Contributing
+- ThabangR
 Contributions are welcome! Feel free to open issues or submit pull requests.
 📸 Screenshots
 ![Dashboard Screenshot](https://github.com/PLThabangR/Weather-app/blob/main/public/blackThemeForecast.png)
